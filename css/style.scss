@@ -1,0 +1,218 @@
+@charset "utf-8";
+
+/*============================================================
+# mixins
+=============================================================*/
+
+//ブレークポイント
+$layout-width-inner: 1200px;
+$breakpoints: (
+  'sp': '(max-width: 767px)', //767px以下（スマホ）用の表示
+  'md': '(min-width: 768px)',//767px以上
+  'm': '(max-width: 1200px)',
+) ;
+
+//メディアクエリ
+@mixin mq($breakpoint: sp) {
+      @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+      }
+}
+
+/*============================================================
+# colors
+=============================================================*/
+
+$primary-color: #3EA1D1;
+$font-color: #333;
+
+/*============================================================
+# common -全体に共通するスタイル
+=============================================================*/
+  @include mq('sp') {
+    .is-pc {
+      display: none;
+    }
+  }
+
+  @include mq('md') {
+    .is-sp {
+      display: none;
+    }  
+  }
+
+  body {
+    font-size: 16px;
+    color: $font-color;
+    font-family: "ヒラギノ明朝 ProN", serif;
+    line-height: 1.6875;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px; //横幅が1200px以下の時の余白
+    box-sizing: content-box;//横幅にpaddingを含めない
+  }
+  
+/* header
+=============================================================*/
+
+
+  .header {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 100px;
+    z-index: 100;
+    margin: 0 auto;
+    padding: 20px 20px 0; //横幅が1200px以下の時の余白
+    box-sizing: content-box;//横幅にpaddingを含めない
+
+      @include mq('m') {
+        left: 0;
+      }
+    
+
+    @include mq('sp') {
+      padding: 10px 10px 0;
+    }
+  }
+
+
+  .header-inner {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .header-logo {
+    width: 120px;
+    margin: 0 auto;
+
+    @include mq('sp') {
+      width: 80px;
+    }
+  }
+
+  .header-nav {
+    margin-left: auto;
+  }
+
+  .header-nav-list {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  
+
+  .header-nav-item {
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    letter-spacing: .1em;//0.1文字分
+
+    a {
+      color: $font-color;
+    }
+  }
+
+
+ /* main
+=============================================================*/
+
+.main-title {
+  text-align: center;
+
+  h1 {
+    font-size: 55px;
+  }
+}
+
+.blog {
+  margin: 0 auto;
+  width: 60%;
+}
+
+.blog-img {
+  width: 80%;
+  height: 80%;
+  margin: 30px auto 30px;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.blog-data {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #000;
+}
+
+
+ /* footer
+=============================================================*/
+
+footer {
+  background: #f7f7f7;
+  padding: 42px 40px 12px;
+  margin-top: 800px;
+}
+
+.footer-logo {
+  width: 120px;
+  margin: 0 auto;
+}
+
+.footer-nav-list {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.footer-nav-item {
+  & + & {
+    margin-left: 30px;
+  }
+}
+
+.footer-nav-item-link {
+  font-size: 12px;
+  color: $font-color;
+  display: block;//リンクはブロックにする
+  padding: 1em 0;//クリック領域は44pxが望ましい
+}
+
+.footer-sns-list {
+  text-align: center;
+}
+
+.footer-sns-item {
+  display: inline-block;
+
+  & + & {
+    margin-left: 10px;
+  }
+}
+
+.footer-sns-link {
+  color: $primary-color;
+  font-size: 24px;
+  display: block;
+  padding: .1em .5em;
+}
+
+.footer-copyright {
+  color: #888;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px; 
+}
+
